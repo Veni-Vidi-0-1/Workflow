@@ -10,7 +10,7 @@
       Элемент в середочке
       <img
         v-if="isVisible"
-        src="https://markup-ua.com/blog/wp-content/uploads/2017/09/vue.jpeg"
+        src="https://i.ytimg.com/vi/b0ecKLOOzJc/hqdefault.jpg"
         width="500"
       >
     </div>
