@@ -1,5 +1,12 @@
 <template>
-  <div>
-    1
-  </div>
+  <Table />
 </template>
+
+<script>
+import Table from '@/components/Table.vue'
+export default  {
+  components: {
+    Table
+  },
+}
+</script>
