@@ -34,9 +34,9 @@
           <el-button
             size="mini"
             type="success"
-            @click="handleBuy(scope.$index, scope.row)"
+            @click="handleBet(scope.$index, scope.row)"
           >
-            Buy
+            Bet
           </el-button>
         </template>
       </el-table-column>
@@ -49,10 +49,12 @@
 
   export default {
     data: () => ({
-      tableData: []
+      tableData: [],
+      names: []
     }),
     
     mounted() {
+      this.names = names
       this.faker()
     },
 
@@ -68,8 +70,21 @@
         }
       },
 
+      handleBet() {
+        let result = prompt('You bet for this slave:')
+        result = Number(result)
+
+        if (result >= 1 && result !== '') {
+          alert('Ты красавчик')
+          return
+        }
+        alert('Ты ugly')
+      },
+
       generateName() {
-        return names[Math.floor(Math.random() * (49 - 1) + 1)]
+        let name = this.names[Math.floor(Math.random() * ((this.names.length - 1) - 1) + 1)]
+        this.names = this.names.filter(e => e !== name)
+        return name
       },
 
       generateAge() {
