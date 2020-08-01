@@ -1,5 +1,7 @@
 <template>
   <div class="ra-table">
+    <Media />
+
     <el-table
       class="ra-table-main"
       :data="tableData"
@@ -13,14 +15,17 @@
         prop="age"
         label="Age"
       ></el-table-column>
+
       <el-table-column
         prop="gender"
         label="Gender"
       ></el-table-column>
+
       <el-table-column
         prop="price"
         label="Price"
       ></el-table-column>
+
       <el-table-column
         label="Operations"
       >
@@ -47,11 +52,18 @@
 <script>
   import names from '@/data/names'
 
+  import Media from '@/components/Media.vue'
+
   export default {
+
     data: () => ({
-      tableData: [],
+      tableData: [], 
       names: []
     }),
+
+    components: {
+      Media
+    },
     
     mounted() {
       this.names = names
