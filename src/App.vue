@@ -1,12 +1,13 @@
 <template>
-  <Table />
+  <Game />
 </template>
 
 <script>
-import Table from '@/components/Table.vue'
+import Game from '@/views/Game.vue'
+
 export default  {
   components: {
-    Table
-  },
+    Game
+  }
 }
 </script>
