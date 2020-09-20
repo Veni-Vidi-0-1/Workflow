@@ -1,0 +1,170 @@
+<button onclick="renderVideo()">Render button</button>
+
+<button onclick="muteAllVideos()">Mute</button>
+
+<div class="ra-video-block" />
+
+<script>
+  let config = {
+    total: 10,
+    rows: 3
+  }
+
+  let renderVideo = (
+    src = 'http://techslides.com/demos/sample-videos/small.mp4',
+    className = 'dt-test-video'
+  ) => {
+    // 1. Создавать изначально div
+    // 2. Отдельная кнопка удаления
+    // 3. Кнопка Play
+    // 4. Вместе аапендим
+
+    let mainElement = document.createElement('div')
+
+    // Video
+    let videoElement = document.createElement('video')
+
+    videoElement.className = className
+    videoElement.src = src
+    videoElement.autoplay = false
+    videoElement.loop = true
+
+    // Remove
+    let removeElement = document.createElement('button')
+    removeElement.textContent = 'Delete'
+    removeElement.onclick = () => {
+      // 1. У mainElement вызвать метод remove() в рамках этой функции
+      mainElement.remove()
+    }
+
+    // Play
+    let playElement = document.createElement('button')
+    playElement.textContent = 'Play'
+    playElement.onclick = () => videoElement.play()
+
+    // Title
+    let title = Math.floor(Math.random() * 256)
+    let titleElement = document.createElement('div')
+    titleElement.textContent = title
+
+    // Input
+    let inputElement = document.createElement('input')
+    inputElement.style.display = 'none'
+
+    // Save
+    let saveElement = document.createElement('button')
+    saveElement.textContent = 'Save'
+    saveElement.style.display = 'none'
+    saveElement.onclick = () => {
+      if (inputElement.value && inputElement.value != '') {
+        titleElement.textContent = inputElement.value
+      } else {
+        alert('Пустое поле')
+      }
+      editElement.style.display = 'block'
+      inputElement.style.display = 'none'
+      saveElement.style.display = 'none'
+      cancelElement.style.display = 'none'
+    }
+
+    // Cancel
+    let cancelElement = document.createElement('button')
+    cancelElement.textContent = 'Cancel'
+    cancelElement.style.display = 'none'
+    cancelElement.onclick = () => {
+      editElement.style.display = 'block'
+      inputElement.style.display = 'none'
+      saveElement.style.display = 'none'
+      cancelElement.style.display = 'none'
+    }
+
+
+    // Edit title
+    let editElement = document.createElement('button')
+    editElement.textContent = 'Edit'
+    editElement.onclick = () => {
+      // 1. Скрыть кнопку редактирования +
+      // 2. Вывести элемент input +
+      // 3. Рядом с input две кнопки - сохранить и отменить +
+      // 4. При введении текста в input и нажатии на сохранить - меняем titleElement.textContent
+      editElement.style.display = 'none'
+      inputElement.style.display = 'block'
+      saveElement.style.display = 'block'
+      cancelElement.style.display = 'block'
+    }
+
+    mainElement.appendChild(videoElement)
+    mainElement.appendChild(titleElement)
+    mainElement.appendChild(inputElement)
+    mainElement.appendChild(saveElement)
+    mainElement.appendChild(cancelElement)
+    mainElement.appendChild(playElement)
+    mainElement.appendChild(editElement)
+    mainElement.appendChild(removeElement)
+
+    document.getElementsByClassName('ra-video-block')[0].appendChild(mainElement)
+  }
+
+  let muteAllVideos = () => {
+    const videoElements = [...document.getElementsByClassName('dt-test-video')]
+
+    videoElements.forEach(el => {
+      el.volume = 0
+    })
+  }
+
+  let testFunction = (number1) => {
+    number2 /= number1
+    number2 += number1
+
+    number2 = number2 - number1
+    number2 -= number1
+    // 5 + Number('5')
+  }
+
+  let renderGrid = () => {
+    let container = document.getElementsByClassName('ra-video-block')[0]
+    let mount = Math.round(config.total / config.rows)
+
+    // repeat(4, 1fr)
+    container.style.gridTemplateColumns = `repeat(${mount}, 1fr)`
+  }
+
+  window.onload = () => {
+    for(let i = 1; i <= config.total; i++) {
+      renderVideo()
+    }
+
+    renderGrid()
+  }
+</script>
+
+<!--
+  Парковочное место для курсоров, во избежание лагов
+  [[
+
+  getRandomInt = function(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
+}
+
+
+
+
+  ]]
+-->
+
+
+<!-- Место для стилей -->
+<style>
+  .ra-video-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .dt-test-video {
+    display: block;
+    width: 100%;
+  }
+</style>
